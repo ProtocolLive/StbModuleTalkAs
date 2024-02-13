@@ -2,7 +2,7 @@
 //Protocol Corporation Ltda.
 //https://github.com/ProtocolLive/StbModuleTalkAs
 
-namespace ProtocolLive\StbModules;
+namespace ProtocolLive\StbModuleTalkAs;
 use ProtocolLive\SimpleTelegramBot\StbInterfaces\StbModuleInterface;
 use ProtocolLive\SimpleTelegramBot\StbObjects\{
   StbDatabase,
