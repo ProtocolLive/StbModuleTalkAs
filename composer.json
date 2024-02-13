@@ -1,0 +1,16 @@
+{
+  "name": "protocollive/stbmoduletalkas",
+  "description": "Fale como se fosse seu bot",
+  "license": "MIT",
+  "require": {
+    "protocollive/simpletelegrambot": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "ProtocolLive\\StbModuleTalkAs": "src/"
+    }
+  },
+  "bin":[
+    "bin/StbModuleTalkAs.php"
+  ]
+}
