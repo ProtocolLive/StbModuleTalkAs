@@ -11,6 +11,7 @@
     }
   },
   "bin":[
-    "bin/StbModuleTalkAsInstall.php"
+    "bin/StbModuleTalkAsInstall.php",
+    "bin/StbModuleTalkAsUninstall.php"
   ]
 }
