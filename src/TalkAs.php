@@ -25,7 +25,7 @@ use ProtocolLive\TelegramBotLibrary\TgObjects\{
 };
 
 /**
- * @version 2024.02.13.02
+ * @version 2024.02.13.03
  */
 abstract class TalkAs
 extends StbModuleHelper
@@ -107,6 +107,12 @@ implements StbModuleInterface{
     StbDatabase $Db,
   ):void{
     DebugTrace();
+    if($Db->ChatGet($Webhook->Parameters) === null):
+      $Bot->TextSend(
+        $Webhook->Data->User->Id,
+        '⚠️ Usuário não encontrado ou não iniciou o bot'
+      );
+    endif;
     $Db->VariableSet('Talk', $Webhook->Parameters, __CLASS__, $Webhook->Data->User->Id);
     $Db->VariableSet('Talk', $Webhook->Data->User->Id, __CLASS__, $Webhook->Parameters);
     $user = $Bot->ChatGet($Webhook->Parameters);
