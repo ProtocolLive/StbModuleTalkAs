@@ -33,7 +33,7 @@ use ProtocolLive\TelegramBotLibrary\TgObjects\{
 };
 
 /**
- * @version 2024.02.13.00
+ * @version 2024.02.13.01
  */
 abstract class TalkAs
 extends StbModuleHelper
@@ -168,7 +168,9 @@ implements StbModuleInterface{
       );
     else:
       if($Webhook::class === TgReactionUpdate::class):
-        $Bot->MessageReaction($to, $Webhook->Message - 1, $Webhook->New->Emoji ?? null);
+        try{
+          $Bot->MessageReaction($to, $Webhook->Data->Id - 1, $Webhook->New->Emoji ?? null);
+        }catch(TblException $e){}
         return;
       endif;
       $Bot->MessageForward($Webhook->Data->User->Id, $Webhook->Data->Id, $to);
