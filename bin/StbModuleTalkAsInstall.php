@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2024.02.13.02
+ * @version 2024.02.13.03
  */
 
 declare(strict_types = 1);
@@ -35,14 +35,15 @@ StbAdminModules::InstallGlobalModule(
     ['del', 'Excluir uma mensagem', __CLASS__, false]
   ],
   [
-    TgText::class, __CLASS__,
-    TgAudio::class, __CLASS__,
-    TgVideo::class, __CLASS__,
-    TgPhoto::class, __CLASS__,
-    TgDocument::class, __CLASS__,
-    TgSticker::class, __CLASS__,
-    TgAnimation::class, __CLASS__,
-    TgVideoNote::class, __CLASS__,
-    TgReactionUpdate::class, __CLASS__
+    [TgText::class, __CLASS__],
+    [TgAudio::class, __CLASS__],
+    [TgVideo::class, __CLASS__],
+    [TgPhoto::class, __CLASS__],
+    [TgDocument::class, __CLASS__],
+    [TgSticker::class, __CLASS__],
+    [TgAnimation::class, __CLASS__],
+    [TgVideoNote::class, __CLASS__],
+    [TgReactionUpdate::class, __CLASS__]
   ]
 );
+echo 'Instalação concuída' . PHP_EOL;
