@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2024.02.13.03
+ * @version 2024.02.14.00
  */
 
 declare(strict_types = 1);
@@ -46,4 +46,4 @@ StbAdminModules::InstallGlobalModule(
     [TgReactionUpdate::class, __CLASS__]
   ]
 );
-echo 'Instalação concuída' . PHP_EOL;
+echo 'Instalação concluída' . PHP_EOL;
