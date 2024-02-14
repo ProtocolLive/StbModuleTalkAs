@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2024.02.14.00
+ * @version 2024.02.14.01
  */
 
 declare(strict_types = 1);
@@ -26,7 +26,7 @@ use ProtocolLive\TelegramBotLibrary\TgObjects\{
 
 require(dirname(__DIR__, 3) . '/autoload.php');
 
-StbAdminModules::InstallGlobalModule(
+StbAdminModules::GlobalModuleInstall(
   'ProtocolLive\\StbModuleTalkAs\\TalkAs',
   [
     ['msg', 'Enviar uma mensagem para um id', __CLASS__, false],
