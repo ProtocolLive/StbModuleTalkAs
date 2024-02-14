@@ -20,20 +20,12 @@ use ProtocolLive\TelegramBotLibrary\TgInterfaces\{
   TgEventInterface
 };
 use ProtocolLive\TelegramBotLibrary\TgObjects\{
-  TgAnimation,
-  TgAudio,
   TgCallback,
-  TgDocument,
-  TgPhoto,
-  TgReactionUpdate,
-  TgSticker,
-  TgText,
-  TgVideo,
-  TgVideoNote
+  TgReactionUpdate
 };
 
 /**
- * @version 2024.02.13.01
+ * @version 2024.02.13.02
  */
 abstract class TalkAs
 extends StbModuleHelper
