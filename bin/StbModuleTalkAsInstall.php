@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2024.02.13.01
+ * @version 2024.02.13.02
  */
 
 declare(strict_types = 1);
@@ -26,7 +26,6 @@ use ProtocolLive\TelegramBotLibrary\TgObjects\{
 
 require(dirname(__DIR__, 3) . '/autoload.php');
 
-$Classe = 
 StbAdminModules::InstallGlobalModule(
   'ProtocolLive\\StbModuleTalkAs\\TalkAs',
   [
