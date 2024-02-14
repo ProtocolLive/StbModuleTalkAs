@@ -1,7 +1,15 @@
 <?php
 /**
- * @version 2024.02.13.00
+ * @version 2024.02.13.01
  */
+
+declare(strict_types = 1);
+ini_set('display_errors', '0');
+ini_set('display_startup_errors', '1');
+ini_set('error_reporting', '-1');
+ini_set('html_errors', '0');
+ini_set('max_execution_time', '10');
+ini_set('error_log', __DIR__ . '/error.log');
 
 use ProtocolLive\SimpleTelegramBot\StbObjects\StbAdminModules;
 use ProtocolLive\TelegramBotLibrary\TgObjects\{
