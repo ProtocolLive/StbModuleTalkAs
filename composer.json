@@ -7,7 +7,7 @@
   },
   "autoload": {
     "psr-4": {
-      "ProtocolLive\\StbModuleTalkAs": "src/"
+      "ProtocolLive\\StbModuleTalkAs\\": "src/"
     }
   },
   "bin":[
