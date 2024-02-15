@@ -25,7 +25,7 @@ use ProtocolLive\TelegramBotLibrary\TgObjects\{
 };
 
 /**
- * @version 2024.02.13.03
+ * @version 2024.02.14.00
  */
 abstract class TalkAs
 extends StbModuleHelper
@@ -139,11 +139,11 @@ implements StbModuleInterface{
     TgEventInterface $Webhook,
     StbDatabase $Db,
     StbLanguageSys $Lang
-  ):void{
+  ):bool{
     DebugTrace();
     $to = $Db->VariableGetValue('Talk', __CLASS__, $Webhook->Data->User->Id);
     if($to === null):
-      return;
+      return false;
     endif;
     if(in_array($Webhook->Data->User->Id, array_column($Db->Admins(), 'Id'))):
       if($Webhook instanceof TgEditedInterface):
@@ -151,12 +151,12 @@ implements StbModuleInterface{
           $Webhook->Data->User->Id,
           '⚠️ A mensagem não pode ser editada para o outro usuário'
         );
-        return;
+        return true;
       elseif($Webhook instanceof TgReactionUpdate):
         try{
           $Bot->MessageReaction($to, $Webhook->Data->Id - 1, $Webhook->New->Emoji ?? null);
         }catch(TblException $e){}
-        return;
+        return true;
       endif;
       $id = $Bot->MessageCopy($Webhook->Data->User->Id, $Webhook->Data->Id, $to);
       $Bot->TextSend(
@@ -169,10 +169,11 @@ implements StbModuleInterface{
         try{
           $Bot->MessageReaction($to, $Webhook->Data->Id - 1, $Webhook->New->Emoji ?? null);
         }catch(TblException $e){}
-        return;
+        return true;
       endif;
       $Bot->MessageForward($Webhook->Data->User->Id, $Webhook->Data->Id, $to);
     endif;
+    return true;
   }
 
   public static function Uninstall(
