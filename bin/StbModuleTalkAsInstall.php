@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2024.02.14.01
+ * @version 2024.03.11.00
  */
 
 declare(strict_types = 1);
@@ -12,6 +12,7 @@ ini_set('max_execution_time', '10');
 ini_set('error_log', __DIR__ . '/error.log');
 
 use ProtocolLive\SimpleTelegramBot\StbObjects\StbAdminModules;
+use ProtocolLive\SimpleTelegramBot\StbParams\StbGlobalModuleCmds;
 use ProtocolLive\TelegramBotLibrary\TgObjects\{
   TgAnimation,
   TgAudio,
@@ -26,24 +27,25 @@ use ProtocolLive\TelegramBotLibrary\TgObjects\{
 
 require(dirname(__DIR__, 3) . '/autoload.php');
 
+$cmd = new StbGlobalModuleCmds;
+$cmd->Add('msg', 'Enviar uma mensagem para um id', false);
+$cmd->Add('talk', 'Conversar com um id', false);
+$cmd->Add('done', 'Terminar conversa', false);
+$cmd->Add('del', 'Excluir uma mensagem', false);
+
 StbAdminModules::GlobalModuleInstall(
-  'ProtocolLive\\StbModuleTalkAs\\TalkAs',
+  ProtocolLive\StbModuleTalkAs\TalkAs::class,
+  $cmd,
   [
-    ['msg', 'Enviar uma mensagem para um id', __CLASS__, false],
-    ['talk', 'Conversar com um id', __CLASS__, false],
-    ['done', 'Terminar conversa', __CLASS__, false],
-    ['del', 'Excluir uma mensagem', __CLASS__, false]
-  ],
-  [
-    [TgText::class, __CLASS__],
-    [TgAudio::class, __CLASS__],
-    [TgVideo::class, __CLASS__],
-    [TgPhoto::class, __CLASS__],
-    [TgDocument::class, __CLASS__],
-    [TgSticker::class, __CLASS__],
-    [TgAnimation::class, __CLASS__],
-    [TgVideoNote::class, __CLASS__],
-    [TgReactionUpdate::class, __CLASS__]
+    TgText::class,
+    TgAudio::class,
+    TgVideo::class,
+    TgPhoto::class,
+    TgDocument::class,
+    TgSticker::class,
+    TgAnimation::class,
+    TgVideoNote::class,
+    TgReactionUpdate::class
   ]
 );
 echo 'Instalação concluída' . PHP_EOL;
