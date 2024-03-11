@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2024.02.14.00
+ * @version 2024.03.11.00
  */
 
 declare(strict_types = 1);
@@ -15,5 +15,5 @@ use ProtocolLive\SimpleTelegramBot\StbObjects\StbAdminModules;
 
 require(dirname(__DIR__, 3) . '/autoload.php');
 
-StbAdminModules::GlobalModuleUninstall('ProtocolLive\\StbModuleTalkAs\\TalkAs');
+StbAdminModules::GlobalModuleUninstall(ProtocolLive\StbModuleTalkAs\TalkAs::class);
 echo 'Desinstalação concluída' . PHP_EOL;
