@@ -25,7 +25,7 @@ use ProtocolLive\TelegramBotLibrary\TgObjects\{
 };
 
 /**
- * @version 2024.02.14.00
+ * @version 2024.03.11.00
  */
 abstract class TalkAs
 extends StbModuleHelper
@@ -155,7 +155,7 @@ implements StbModuleInterface{
       elseif($Webhook instanceof TgReactionUpdate):
         try{
           $Bot->MessageReaction($to, $Webhook->Data->Id - 1, $Webhook->New->Emoji ?? null);
-        }catch(TblException $e){}
+        }catch(TblException){}
         return true;
       endif;
       $id = $Bot->MessageCopy($Webhook->Data->User->Id, $Webhook->Data->Id, $to);
@@ -168,7 +168,7 @@ implements StbModuleInterface{
       if($Webhook::class === TgReactionUpdate::class):
         try{
           $Bot->MessageReaction($to, $Webhook->Data->Id - 1, $Webhook->New->Emoji ?? null);
-        }catch(TblException $e){}
+        }catch(TblException){}
         return true;
       endif;
       $Bot->MessageForward($Webhook->Data->User->Id, $Webhook->Data->Id, $to);
