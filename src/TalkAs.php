@@ -25,7 +25,7 @@ use ProtocolLive\TelegramBotLibrary\TgObjects\{
 };
 
 /**
- * @version 2024.07.03.00
+ * @version 2024.10.07.00
  */
 abstract class TalkAs
 extends StbModuleHelper
@@ -69,8 +69,8 @@ implements StbModuleInterface{
     $Db->VariableDel('Talk', null, __CLASS__, $to);
     $Db->VariableDel('LastMsg', null, __CLASS__, $Webhook->Data->User->Id);
     $Bot->TextSend(
-      'Conversa finalizada',
-      $Webhook->Data->User->Id
+      $Webhook->Data->User->Id,
+      'Conversa finalizada'
     );
   }
 
@@ -80,23 +80,21 @@ implements StbModuleInterface{
     StbDatabase $Db,
   ):void{
     DebugTrace();
-    $params = explode(' ', $Webhook->Parameters);
+    $params = explode(' ', $Webhook->Parameters, 2);
     try{
-      $id = $Bot->MessageCopy(
-        $Webhook->Data->Chat->Id,
-        $Webhook->Data->Id,
+      $id = $Bot->TextSend(
         $params[0],
-        Caption: $params[1]
+        $params[1]
       );
       $Bot->TextSend(
-        'Id: <code>' . $id . '</code>',
         $Webhook->Data->User->Id,
+        'Id: <code>' . $id->Data->Id . '</code>',
         ParseMode: TgParseMode::Html
       );
     }catch(TblException $e){
       $Bot->TextSend(
-        $e->getMessage(),
-        $Webhook->Data->User->Id
+        Admin,
+        $e->getMessage()
       );
     }
   }
@@ -109,8 +107,8 @@ implements StbModuleInterface{
     DebugTrace();
     if($Db->ChatGet($Webhook->Parameters) === null):
       $Bot->TextSend(
-        '⚠️ Usuário não encontrado ou não iniciou o bot',
-        $Webhook->Data->User->Id
+        $Webhook->Data->User->Id,
+        '⚠️ Usuário não encontrado ou não iniciou o bot'
       );
     endif;
     $Db->VariableSet('Talk', $Webhook->Parameters, __CLASS__, $Webhook->Data->User->Id);
@@ -121,8 +119,8 @@ implements StbModuleInterface{
       $nome .= ' ' . $user->NameLast;
     endif;
     $Bot->TextSend(
-      'Agora você conversando com ' . $nome . '. Use o comando /done para finalizar.',
-      $Webhook->Data->User->Id
+      $Webhook->Data->User->Id,
+      'Agora você conversando com ' . $nome . '. Use o comando /done para finalizar.'
     );
   }
 
@@ -148,8 +146,8 @@ implements StbModuleInterface{
     if(in_array($Webhook->Data->User->Id, array_column($Db->Admins(), 'Id'))):
       if($Webhook instanceof TgEditedInterface):
         $Bot->TextSend(
-          '⚠️ A mensagem não pode ser editada para o outro usuário',
-          $Webhook->Data->User->Id
+          $Webhook->Data->User->Id,
+          '⚠️ A mensagem não pode ser editada para o outro usuário'
         );
         return true;
       elseif($Webhook instanceof TgReactionUpdate):
@@ -160,8 +158,8 @@ implements StbModuleInterface{
       endif;
       $id = $Bot->MessageCopy($Webhook->Data->User->Id, $Webhook->Data->Id, $to);
       $Bot->TextSend(
-        'Id: <code>' . $id . '</code>',
         $Webhook->Data->User->Id,
+        'Id: <code>' . $id . '</code>',
         ParseMode: TgParseMode::Html
       );
     else:
