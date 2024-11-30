@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2024.03.11.00
+ * @version 2024.11.30.00
  */
 
 declare(strict_types = 1);
@@ -13,17 +13,7 @@ ini_set('error_log', __DIR__ . '/error.log');
 
 use ProtocolLive\SimpleTelegramBot\StbObjects\StbAdminModules;
 use ProtocolLive\SimpleTelegramBot\StbParams\StbGlobalModuleCmds;
-use ProtocolLive\TelegramBotLibrary\TgObjects\{
-  TgAnimation,
-  TgAudio,
-  TgDocument,
-  TgPhoto,
-  TgReactionUpdate,
-  TgSticker,
-  TgText,
-  TgVideo,
-  TgVideoNote
-};
+use ProtocolLive\TelegramBotLibrary\TgInterfaces\TgMessageInterface;
 
 require(dirname(__DIR__, 3) . '/autoload.php');
 
@@ -36,16 +26,6 @@ $cmd->Add('del', 'Excluir uma mensagem', false);
 StbAdminModules::GlobalModuleInstall(
   ProtocolLive\StbModuleTalkAs\TalkAs::class,
   $cmd,
-  [
-    TgText::class,
-    TgAudio::class,
-    TgVideo::class,
-    TgPhoto::class,
-    TgDocument::class,
-    TgSticker::class,
-    TgAnimation::class,
-    TgVideoNote::class,
-    TgReactionUpdate::class
-  ]
+  [TgMessageInterface::class]
 );
 echo 'Instalação concluída' . PHP_EOL;
